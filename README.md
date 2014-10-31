@@ -36,7 +36,7 @@ the `mpdf` component as described in the [yii2-grid documentation](http://demos.
 
 ```php
 'components'=>[
-   'mpdf'=>[
+   'pdf'=>[
         'class'=>'\kartik\mpdf\mpdf',
         // other settings (refer documentation)
     ],
