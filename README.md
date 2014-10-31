@@ -3,7 +3,7 @@ yii2-mpdf
 
 The **yii2-mpdf**  is a Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.
 
-### _ Extension is under development _
+### _Extension is under development_
 
 ### Demo
 You can see detailed [documentation](http://demos.krajee.com/mpdf) or view a [complete demo](http://demos.krajee.com/mpdf-demo) on usage of the extension.
