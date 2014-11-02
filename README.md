@@ -20,7 +20,7 @@ You can see detailed [documentation](http://demos.krajee.com/mpdf) on usage of t
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-> Note: You must set the `minimum-stability` to `dev` in the **composer.json** file in your application root folder before installation of this extension.
+> Note: Read this [web tip /wiki](http://webtips.krajee.com/setting-composer-minimum-stability-application/) on setting the `minimum-stability` settings for your application's composer.json.
 
 Either run
 
@@ -113,3 +113,4 @@ For other usage and details, read the detailed [documentation](http://demos.kraj
 ## License
 
 **yii2-mpdf** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
+cd
