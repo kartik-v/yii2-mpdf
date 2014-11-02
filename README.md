@@ -14,7 +14,7 @@ The **yii2-mpdf** extension is a Yii2 wrapper component for the [mPDF library](h
 - Inbuilt integration with [yii2-grid](http://demos.krajee.com/grid) extension that allows you to export grid as PDF and even generate advanced PDF reports.
 
 ### Demo
-You can see detailed [documentation](http://demos.krajee.com/mpdf) on usage of the extension.
+Read the detailed [documentation and usage](http://demos.krajee.com/mpdf) of the extension.
 
 ## Installation
 
