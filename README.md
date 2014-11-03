@@ -6,7 +6,7 @@ The **yii2-mpdf** extension is a Yii2 wrapper component for the [mPDF library](h
 - Setup `pdf` component globally in your yii application configuration.
 - Setup mPDF properties or call mPDF methods easily using simple array configuration.
 - Enhances extension to setup your own custom CSS file for rendering the formatted HTML content.
-- Extension has a built-in version of bootstrap.css (v3.2.0 modified for mPDF) to be applied by default. This will allow you to generate PDF content from bootstrap markup HTML easily.
+- Extension has a built-in version of bootstrap.css (v3.3.0 modified for mPDF) to be applied by default. This will allow you to generate PDF content from bootstrap markup HTML easily.
 - Offers easy way to prepend inline CSS in addition to your own CSS file.
 - Offers easy to use object oriented methods to render complex PDF.
 - Easy use of the extension like any Yii widget by using the render method with minimal configuration.
