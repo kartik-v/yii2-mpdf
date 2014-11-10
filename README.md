@@ -20,7 +20,8 @@ Read the detailed [documentation and usage](http://demos.krajee.com/mpdf) of the
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-> Note: Read this [web tip /wiki](http://webtips.krajee.com/setting-composer-minimum-stability-application/) on setting the `minimum-stability` settings for your application's composer.json.
+> Note: Check the [composer.json](https://github.com/kartik-v/yii2-mpdf/blob/master/composer.json) for this extension's requirements and dependencies. 
+Read this [web tip /wiki](http://webtips.krajee.com/setting-composer-minimum-stability-application/) on setting the `minimum-stability` settings for your application's composer.json.
 
 Either run
 
