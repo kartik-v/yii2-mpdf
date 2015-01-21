@@ -275,10 +275,10 @@ class Pdf extends Component
      * @param string content, the input HTML content
      * @param string file, the name of the file. If not specified, the document will be
      * sent to the browser inline (destination I).
-     * @param string dest, the destination. Defaults to Pdf::DEST_INLINE.
+     * @param string dest, the destination. Defaults to Pdf::DEST_BROWSER.
      * @return mixed
      */
-    public function output($content = '', $file = '', $dest = self::DEST_INLINE)
+    public function output($content = '', $file = '', $dest = self::DEST_BROWSER)
     {
         $api = $this->api;
         $css = $this->css;
