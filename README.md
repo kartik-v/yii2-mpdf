@@ -1,6 +1,12 @@
 yii2-mpdf
 =============
 
+[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-mpdf/v/stable.svg)](https://packagist.org/packages/kartik-v/yii2-mpdf)
+[![License](https://poser.pugx.org/kartik-v/yii2-mpdf/license.svg)](https://packagist.org/packages/kartik-v/yii2-mpdf)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-mpdf/downloads.svg)](https://packagist.org/packages/kartik-v/yii2-mpdf)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-mpdf/d/monthly.png)](https://packagist.org/packages/kartik-v/yii2-mpdf)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-mpdf/d/daily.png)](https://packagist.org/packages/kartik-v/yii2-mpdf)
+
 The **yii2-mpdf** extension is a Yii2 wrapper component for the [mPDF library](http://www.mpdf1.com/) with enhancements. The mPDF library offers ability to generate PDF files from UTF-8 encoded HTML. This library is based on [FPDF](http://www.fpdf.org/) and [HTML2FPDF](http://html2fpdf.sourceforge.net/), with a number of enhancements. The key features in the library are to be able to generate PDF files 'on-the-fly' from HTML content, handling different languages. See the [list of features](http://mpdf.bpm1.com/index.php?page=Features) and/or [examples](http://www.mpdf1.com/mpdf/index.php?page=Examples) for the library. The yii2-mpdf extension offers an easy way to integrate and use the mPDF library within your Yii application with subtle enhancements. The key features offerred with this release are:
 
 - Setup `pdf` component globally in your yii application configuration.
