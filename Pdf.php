@@ -186,7 +186,7 @@ class Pdf extends Component
     public function initTempPaths()
     {
         if (empty($this->tempPath)) {
-            $this->tempPath = Yii::getAlias('@app/runtime/mpdf');
+            $this->tempPath = Yii::getAlias('@runtime/mpdf');
         }
         $prefix = $this->tempPath . DIRECTORY_SEPARATOR;
         static::definePath('_MPDF_TEMP_PATH', "{$prefix}tmp");
