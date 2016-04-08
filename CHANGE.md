@@ -1,5 +1,8 @@
-version 1.0.1
-=============
+Change Log: `yii2-mpdf`
+=======================
+
+## Version 1.0.1
+
 **Date:** 08-Apr-2016
 
 - (enh #12): New `tempPath` property to allow setting temporary folder for mpdf font data.
@@ -8,8 +11,8 @@ version 1.0.1
 - Update mpdf source to use repo https://github.com/mpdf/mpdf.
 - Add branch alias for dev-master latest release.
 
-version 1.0.0
-=============
+## Version 1.0.0
+
 **Date:** 03-Nov-2014
 
 - Initial release.
