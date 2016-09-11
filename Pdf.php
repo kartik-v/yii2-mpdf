@@ -171,6 +171,12 @@ class Pdf extends Component
     protected $_css;
 
     /**
+     * 
+     * @var array Array of file-pathes that should be attached to the generated PDF
+     */
+    protected $_pdfAttachements;
+    
+    /**
      * @inherit doc
      */
     public function init()
@@ -280,7 +286,21 @@ class Pdf extends Component
         $css .= $this->cssInline;
         return $css;
     }
-
+     
+    /**
+     * @return array Array of attachements
+     */
+    public function getPdfAttachements (){
+    	return $this->_pdfAttachements;
+    }
+    
+    /**
+     * add an PDF to attach to the generated PDF
+     * @param string $filePath
+     */
+    public function addPdfAttachement ($filePath){
+    	$this->_pdfAttachements[] = $filePath;
+    }
     /**
      * Configures mPDF options
      * @param array the mPDF configuration options entered as a `$key => value`
@@ -331,15 +351,40 @@ class Pdf extends Component
     {
         $api = $this->api;
         $css = $this->css;
+        $pdfAttachements = $this->getPdfAttachements();
         if (!empty($css)) {
             $api->WriteHTML($css, 1);
             $api->WriteHTML($content, 2);
         } else {
             $api->WriteHTML($content);
+        } 
+        
+        if($pdfAttachements){
+        	$api->SetImportUse();
+        	$api->SetHeader(null);
+        	$api->SetFooter(null);
+        	foreach ($pdfAttachements as $attachement){
+        		$this->writePdfAttachement($api, $attachement);
+        	}
         }
+        
         return $api->Output($file, $dest);
     }
-
+ 
+    /**
+     * appends the given attachement to the generated PDF
+     * @param mPDF $api
+     * @param String $attachement
+     */
+    private function writePdfAttachement ($api, $attachement){
+    	$pageCount = $api->SetSourceFile($attachement);
+    	for($i=1; $i<=$pageCount; $i++){
+    		$api->AddPage();
+    		$templateId = $api->ImportPage($i);
+    		$api->UseTemplate($templateId);
+    	}
+    }
+    
     /**
      * Parse the format automatically based on the orientation
      */
