@@ -377,7 +377,11 @@ class Pdf extends Component
      * @param String $attachement
      */
     private function writePdfAttachement ($api, $attachement){
-    	$pageCount = $api->SetSourceFile($attachement);
+    	try {
+    		$pageCount = $api->SetSourceFile($attachement);
+    	} catch (\MpdfException $e){
+    		$pageCount = 0;
+    	}
     	for($i=1; $i<=$pageCount; $i++){
     		$api->AddPage();
     		$templateId = $api->ImportPage($i);
