@@ -8,7 +8,7 @@
 
 namespace kartik\mpdf;
 
-use mPDF;
+use Mpdf\Mpdf;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
@@ -17,7 +17,7 @@ use yii\base\InvalidParamException;
 /**
  * The Pdf class is a Yii2 component that allows to convert HTML content to portable document format (PDF). It allows
  * configuration of how the PDF document is generated and how it should be delivered to the user. This component uses
- * the [[mPDF]] library and includes various additional enhancements specifically for the Yii2 framework.
+ * the [[Mpdf]] library and includes various additional enhancements specifically for the Yii2 framework.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
@@ -143,6 +143,10 @@ class Pdf extends Component
      */
     public $orientation = self::ORIENT_PORTRAIT;
     /**
+     * @var array additional Mpdf initialization configuration properties. See [[Mpdf]] documentation.
+     */
+    public $initConfig = [];
+    /**
      * @var string css file to prepend to the PDF
      */
     public $cssFile = '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css';
@@ -168,14 +172,14 @@ class Pdf extends Component
      */
     public $tempPath;
     /**
-     * @var array the mPDF methods that will called in the sequence listed before rendering the content. Should be an
+     * @var array the Mpdf methods that will called in the sequence listed before rendering the content. Should be an
      * associative array entered as `$method => $params` pairs, where:
-     * - `$method`: _string_, is the mPDF method / function name
-     * - `$param`: _mixed_, are the mPDF method parameters
+     * - `$method`: _string_, is the Mpdf method / function name
+     * - `$param`: _mixed_, are the Mpdf method parameters
      */
     public $methods = '';
     /**
-     * @var string the mPDF configuration options entered as `$key => value` pairs, where:
+     * @var string the Mpdf configuration options entered as `$key => value` pairs, where:
      * - `$key`: _string_, is the configuration property name
      * - `$value`: _mixed_, is the configured property value
      */
@@ -185,7 +189,7 @@ class Pdf extends Component
         'tabSpaces' => 4,
     ];
     /**
-     * @var mPDF api instance
+     * @var Mpdf api instance
      */
     protected $_mpdf;
     /**
@@ -199,9 +203,9 @@ class Pdf extends Component
     protected $_pdfAttachments;
 
     /**
-     * Defines a mPDF temporary path if not set.
+     * Defines a Mpdf temporary path if not set.
      *
-     * @param string $prop the mPDF constant to define
+     * @param string $prop the Mpdf constant to define
      * @param string $dir the directory to create
      *
      * @throws InvalidConfigException
@@ -232,7 +236,7 @@ class Pdf extends Component
     }
 
     /**
-     * Initialize folder paths to allow [[mPDF]] to write temporary data.
+     * Initialize folder paths to allow [[Mpdf]] to write temporary data.
      */
     public function initTempPaths()
     {
@@ -261,36 +265,40 @@ class Pdf extends Component
     }
 
     /**
-     * Validates and fetches the mPDF API instance.
+     * Validates and fetches the Mpdf API instance.
      *
-     * @return mPDF
+     * @return Mpdf
      */
     public function getApi()
     {
-        if (empty($this->_mpdf) || !$this->_mpdf instanceof mPDF) {
+        if (empty($this->_mpdf) || !$this->_mpdf instanceof Mpdf) {
             $this->setApi();
         }
         return $this->_mpdf;
     }
 
     /**
-     * Sets the mPDF API instance
+     * Sets the Mpdf API instance
      */
     public function setApi()
     {
-        $this->_mpdf = new mPDF(
-            $this->mode,
-            $this->format,
-            $this->defaultFontSize,
-            $this->defaultFont,
-            $this->marginLeft,
-            $this->marginRight,
-            $this->marginTop,
-            $this->marginBottom,
-            $this->marginHeader,
-            $this->marginFooter,
-            $this->orientation
-        );
+        $config = array_replace_recursive($this->initConfig, [
+            'mode' => $this->mode,
+            'format' => $this->format,
+            'default_font_size' => $this->defaultFontSize,
+            'default_font' => $this->defaultFont,
+            'mgl' => $this->marginLeft,
+            'mgr' => $this->marginRight,
+            'mgt' => $this->marginTop,
+            'mgb' => $this->marginBottom,
+            'mgh' => $this->marginHeader,
+            'mgf' => $this->marginFooter,
+            'orientation' => $this->orientation
+        ]);
+        if (isset($this->tempPath) && is_dir($this->tempPath)) {
+            $config['tempDir'] = $this->tempPath;
+        }
+        $this->_mpdf = new Mpdf($config);
     }
 
     /**
@@ -334,9 +342,9 @@ class Pdf extends Component
     }
 
     /**
-     * Configures mPDF options
+     * Configures Mpdf options
      *
-     * @param array $options the mPDF configuration options entered as `$key => value` pairs, where:
+     * @param array $options the Mpdf configuration options entered as `$key => value` pairs, where:
      * - `$key`: _string_, is the configuration property name
      * - `$value`: _mixed_, is the configured property value
      */
@@ -354,10 +362,10 @@ class Pdf extends Component
     }
 
     /**
-     * Calls the mPDF method with parameters
+     * Calls the Mpdf method with parameters
      *
-     * @param string $method the mPDF method / function name
-     * @param array  $params the mPDF parameters
+     * @param string $method the Mpdf method / function name
+     * @param array  $params the Mpdf parameters
      *
      * @return mixed
      * @throws InvalidParamException
@@ -366,7 +374,7 @@ class Pdf extends Component
     {
         $api = $this->getApi();
         if (!method_exists($api, $method)) {
-            throw new InvalidParamException("Invalid or undefined mPDF method '{$method}' passed to 'Pdf::execute'.");
+            throw new InvalidParamException("Invalid or undefined Mpdf method '{$method}' passed to 'Pdf::execute'.");
         }
         if (!is_array($params)) {
             $params = [$params];
@@ -422,7 +430,7 @@ class Pdf extends Component
     /**
      * Appends the given attachment to the generated PDF
      *
-     * @param mPDF   $api the mPDF API instance
+     * @param Mpdf   $api the Mpdf API instance
      * @param string $attachment the attachment name
      */
     private function writePdfAttachment($api, $attachment)

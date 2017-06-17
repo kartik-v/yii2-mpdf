@@ -5,6 +5,7 @@ Change Log: `yii2-mpdf`
 
 **Date:** 17-Jun-2017
 
+- (enh #58): New property `initConfig` to initialize other Mpdf initial configuration properties.
 - (enh #45, #51): Updates dependency to use latest mPdf 7.x development branch.
 
 ## Version 1.0.1
