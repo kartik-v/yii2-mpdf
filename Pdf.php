@@ -143,10 +143,6 @@ class Pdf extends Component
      */
     public $orientation = self::ORIENT_PORTRAIT;
     /**
-     * @var array additional Mpdf initialization configuration properties. See [[Mpdf]] documentation.
-     */
-    public $initConfig = [];
-    /**
      * @var string css file to prepend to the PDF
      */
     public $cssFile = '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css';
@@ -179,7 +175,7 @@ class Pdf extends Component
      */
     public $methods = '';
     /**
-     * @var string the Mpdf configuration options entered as `$key => value` pairs, where:
+     * @var array the Mpdf configuration options entered as `$key => value` pairs, where:
      * - `$key`: _string_, is the configuration property name
      * - `$value`: _mixed_, is the configured property value
      */
@@ -255,7 +251,6 @@ class Pdf extends Component
      */
     public function render()
     {
-        $this->configure($this->options);
         if (!empty($this->methods)) {
             foreach ($this->methods as $method => $param) {
                 $this->execute($method, $param);
@@ -282,19 +277,22 @@ class Pdf extends Component
      */
     public function setApi()
     {
-        $config = array_replace_recursive($this->initConfig, [
-            'mode' => $this->mode,
-            'format' => $this->format,
-            'default_font_size' => $this->defaultFontSize,
-            'default_font' => $this->defaultFont,
-            'mgl' => $this->marginLeft,
-            'mgr' => $this->marginRight,
-            'mgt' => $this->marginTop,
-            'mgb' => $this->marginBottom,
-            'mgh' => $this->marginHeader,
-            'mgf' => $this->marginFooter,
-            'orientation' => $this->orientation
-        ]);
+        $config = array_replace_recursive(
+            $this->options,
+            [
+                'mode' => $this->mode,
+                'format' => $this->format,
+                'default_font_size' => $this->defaultFontSize,
+                'default_font' => $this->defaultFont,
+                'mgl' => $this->marginLeft,
+                'mgr' => $this->marginRight,
+                'mgt' => $this->marginTop,
+                'mgb' => $this->marginBottom,
+                'mgh' => $this->marginHeader,
+                'mgf' => $this->marginFooter,
+                'orientation' => $this->orientation,
+            ]
+        );
         if (isset($this->tempPath) && is_dir($this->tempPath)) {
             $config['tempDir'] = $this->tempPath;
         }
@@ -339,26 +337,6 @@ class Pdf extends Component
     public function addPdfAttachment($filePath)
     {
         $this->_pdfAttachments[] = $filePath;
-    }
-
-    /**
-     * Configures Mpdf options
-     *
-     * @param array $options the Mpdf configuration options entered as `$key => value` pairs, where:
-     * - `$key`: _string_, is the configuration property name
-     * - `$value`: _mixed_, is the configured property value
-     */
-    public function configure($options = [])
-    {
-        if (empty($options)) {
-            return;
-        }
-        $api = $this->getApi();
-        foreach ($options as $key => $value) {
-            if (property_exists($api, $key)) {
-                $api->$key = $value;
-            }
-        }
     }
 
     /**
