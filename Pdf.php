@@ -208,9 +208,11 @@ class Pdf extends Component
      */
     protected static function definePath($prop, $dir)
     {
-        $propDir = constant($prop);
-        if (defined($prop) && is_writable($propDir)) {
-            return;
+        if (defined($prop)) {
+            $propDir = constant($prop);
+            if (is_writable($propDir)) {
+                return;
+            }
         }
         $status = true;
         if (!is_dir($dir)) {

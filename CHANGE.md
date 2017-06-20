@@ -5,6 +5,7 @@ Change Log: `yii2-mpdf`
 
 **Date:** 20-Jun-2017
 
+- (bug #59): Correct Mpdf constant parsing.
 - (enh #45, #51): Updates dependency to use latest mPdf 7.x development branch.
 
 ## Version 1.0.1
