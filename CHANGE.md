@@ -3,7 +3,7 @@ Change Log: `yii2-mpdf`
 
 ## Version 1.0.2
 
-**Date:** 17-Jun-2017
+**Date:** 20-Jun-2017
 
 - (enh #45, #51): Updates dependency to use latest mPdf 7.x development branch.
 
