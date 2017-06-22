@@ -244,9 +244,10 @@ class Pdf extends Component
         if (empty($this->tempPath)) {
             $this->tempPath = Yii::getAlias('@runtime/mpdf');
         }
-        $prefix = $this->tempPath . DIRECTORY_SEPARATOR;
-        static::definePath('_MPDF_TEMP_PATH', "{$prefix}tmp");
-        static::definePath('_MPDF_TTFONTDATAPATH', "{$prefix}ttfontdata");
+        $s = DIRECTORY_SEPARATOR;
+        $prefix = $this->tempPath . $s;
+        static::definePath('_MPDF_TEMP_PATH', "{$prefix}tmp{$s}");
+        static::definePath('_MPDF_TTFONTDATAPATH', "{$prefix}ttfontdata{$s}");
     }
 
     /**
