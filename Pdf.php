@@ -287,12 +287,12 @@ class Pdf extends Component
         $this->options['format'] = $this->format;
         $this->options['default_font_size'] = $this->defaultFontSize;
         $this->options['default_font'] = $this->defaultFont;
-        $this->options['mgl'] = $this->marginLeft;
-        $this->options['mgr'] = $this->marginRight;
-        $this->options['mgt'] = $this->marginTop;
-        $this->options['mgb'] = $this->marginBottom;
-        $this->options['mgh'] = $this->marginHeader;
-        $this->options['mgf'] = $this->marginFooter;
+        $this->options['margin_left'] = $this->marginLeft;
+        $this->options['margin_right'] = $this->marginRight;
+        $this->options['margin_top'] = $this->marginTop;
+        $this->options['margin_bottom'] = $this->marginBottom;
+        $this->options['margin_header'] = $this->marginHeader;
+        $this->options['margin_footer'] = $this->marginFooter;
         $this->options['orientation'] = $this->orientation;
         if (isset($this->tempPath) && is_dir($this->tempPath)) {
             $this->options['tempDir'] = $this->tempPath;
