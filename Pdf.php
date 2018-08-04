@@ -391,7 +391,43 @@ class Pdf extends Component
                 $this->writePdfAttachment($api, $attachment);
             }
         }
-        return $api->Output($file, $dest);
+
+        $is_web_response = (Yii::$app->response instanceof \yii\web\Response);
+
+        // For non-web response, or for file / string output, use the mPDF function as it is
+        if (!$is_web_response || in_array($dest, [self::DEST_FILE, self::DEST_STRING])) {
+        	return $api->Output($file, $dest);
+        }
+
+        // Workaround for browser & download output.
+        // Otherwise, "Headers already sent" exception will be thrown.
+        //
+        // Steps:
+        // - Set the destination to string
+        // - Set response headers through yii\web\Response
+        $output = $api->Output($file, self::DEST_STRING);
+
+        $headers = Yii::$app->response->getHeaders();
+
+		$headers->set('Content-Type', 'application/pdf');
+        $headers->set('Content-Transfer-Encoding', 'binary');
+		$headers->set('Cache-Control', 'public, must-revalidate, max-age=0');
+		$headers->set('Pragma', 'public');
+		$headers->set('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+		$headers->set('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
+
+		if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) || empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+			// don't use length if server using compression
+			$headers->set('Content-Length', strlen($this->buffer));
+		}
+
+		if ($dest == self::DEST_BROWSER) {
+			$headers->set('Content-Disposition', 'inline; filename="' . $file . '"');
+		} else {
+			$headers->set('Content-Disposition', 'attachment; filename="' . $file . '"');
+		}
+
+        return $output;
     }
 
     /**
