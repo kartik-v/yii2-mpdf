@@ -1,6 +1,16 @@
 Change Log: `yii2-mpdf`
 =======================
 
+## Version 1.0.3
+
+**Date:** 04-Oct-2018
+
+- Add .gitattributes.
+- Move all source code to `src` directory.
+- (bug #84): Fix bug with `$this->buffer`.
+- (enh #77): Correct headers already sent for "Download" & "Browser" destinations.
+- (bug #60): Correct missing `Mpdf::init` constructor params.
+
 ## Version 1.0.2
 
 **Date:** 22-Jun-2017

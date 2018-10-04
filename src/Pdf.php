@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
  * @package yii2-mpdf
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 namespace kartik\mpdf;
@@ -12,7 +12,7 @@ use Mpdf\Mpdf;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use yii\base\InvalidParamException;
+use yii\web\Response;
 
 /**
  * The Pdf class is a Yii2 component that allows to convert HTML content to portable document format (PDF). It allows
@@ -145,7 +145,7 @@ class Pdf extends Component
     /**
      * @var string css file to prepend to the PDF
      */
-    public $cssFile = '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css';
+    public $cssFile = '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css';
     /**
      * @var string additional inline css to append after the cssFile
      */
@@ -254,6 +254,7 @@ class Pdf extends Component
      * Renders and returns the PDF output. Uses the class level property settings.
      *
      * @return mixed
+     * @throws InvalidConfigException
      */
     public function render()
     {
@@ -344,16 +345,16 @@ class Pdf extends Component
      * Calls the Mpdf method with parameters
      *
      * @param string $method the Mpdf method / function name
-     * @param array  $params the Mpdf parameters
+     * @param array $params the Mpdf parameters
      *
      * @return mixed
-     * @throws InvalidParamException
+     * @throws InvalidConfigException
      */
     public function execute($method, $params = [])
     {
         $api = $this->getApi();
         if (!method_exists($api, $method)) {
-            throw new InvalidParamException("Invalid or undefined Mpdf method '{$method}' passed to 'Pdf::execute'.");
+            throw new InvalidConfigException("Invalid or undefined Mpdf method '{$method}' passed to 'Pdf::execute'.");
         }
         if (!is_array($params)) {
             $params = [$params];
@@ -392,11 +393,11 @@ class Pdf extends Component
             }
         }
 
-        $is_web_response = (Yii::$app->response instanceof \yii\web\Response);
+        $is_web_response = (Yii::$app->response instanceof Response);
 
         // For non-web response, or for file / string output, use the mPDF function as it is
         if (!$is_web_response || in_array($dest, [self::DEST_FILE, self::DEST_STRING])) {
-        	return $api->Output($file, $dest);
+            return $api->Output($file, $dest);
         }
 
         // Workaround for browser & download output.
@@ -406,26 +407,24 @@ class Pdf extends Component
         // - Set the destination to string
         // - Set response headers through yii\web\Response
         $output = $api->Output($file, self::DEST_STRING);
-
         $headers = Yii::$app->response->getHeaders();
-
-		$headers->set('Content-Type', 'application/pdf');
+        $headers->set('Content-Type', 'application/pdf');
         $headers->set('Content-Transfer-Encoding', 'binary');
-		$headers->set('Cache-Control', 'public, must-revalidate, max-age=0');
-		$headers->set('Pragma', 'public');
-		$headers->set('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
-		$headers->set('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
+        $headers->set('Cache-Control', 'public, must-revalidate, max-age=0');
+        $headers->set('Pragma', 'public');
+        $headers->set('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+        $headers->set('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
 
-		if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) || empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
-			// don't use length if server using compression
-			$headers->set('Content-Length', strlen($output));
-		}
+        if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) || empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+            // don't use length if server using compression
+            $headers->set('Content-Length', strlen($output));
+        }
 
-		if ($dest == self::DEST_BROWSER) {
-			$headers->set('Content-Disposition', 'inline; filename="' . $file . '"');
-		} else {
-			$headers->set('Content-Disposition', 'attachment; filename="' . $file . '"');
-		}
+        if ($dest == self::DEST_BROWSER) {
+            $headers->set('Content-Disposition', 'inline; filename="' . $file . '"');
+        } else {
+            $headers->set('Content-Disposition', 'attachment; filename="' . $file . '"');
+        }
 
         return $output;
     }
@@ -445,7 +444,7 @@ class Pdf extends Component
     /**
      * Appends the given attachment to the generated PDF
      *
-     * @param Mpdf   $api the Mpdf API instance
+     * @param Mpdf $api the Mpdf API instance
      * @param string $attachment the attachment name
      */
     private function writePdfAttachment($api, $attachment)
