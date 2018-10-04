@@ -418,7 +418,7 @@ class Pdf extends Component
 
 		if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) || empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
 			// don't use length if server using compression
-			$headers->set('Content-Length', strlen($this->buffer));
+			$headers->set('Content-Length', strlen($output));
 		}
 
 		if ($dest == self::DEST_BROWSER) {
