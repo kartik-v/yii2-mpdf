@@ -1,6 +1,12 @@
 Change Log: `yii2-mpdf`
 =======================
 
+## Version 1.0.4
+
+**Date:** 09-Oct-2018
+
+- (enh #77, #85): More correct response headers.
+
 ## Version 1.0.3
 
 **Date:** 04-Oct-2018
