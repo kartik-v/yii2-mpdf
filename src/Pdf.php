@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2018
  * @package yii2-mpdf
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 namespace kartik\mpdf;
@@ -258,11 +258,6 @@ class Pdf extends Component
      */
     public function render()
     {
-        if (!empty($this->methods)) {
-            foreach ($this->methods as $method => $param) {
-                $this->execute($method, $param);
-            }
-        }
         return $this->output($this->content, $this->filename, $this->destination);
     }
 
@@ -371,12 +366,18 @@ class Pdf extends Component
      * @param string $dest the output destination. Defaults to [[DEST_BROWSER]].
      *
      * @return mixed
+     * @throws InvalidConfigException
      */
     public function output($content = '', $file = '', $dest = self::DEST_BROWSER)
     {
         $api = $this->getApi();
         $css = $this->getCss();
         $pdfAttachments = $this->getPdfAttachments();
+        if (!empty($this->methods)) {
+            foreach ($this->methods as $method => $param) {
+                $this->execute($method, $param);
+            }
+        }
         if (!empty($css)) {
             $api->WriteHTML($css, 1);
             $api->WriteHTML($content, 2);

@@ -1,6 +1,12 @@
 Change Log: `yii2-mpdf`
 =======================
 
+## Version 1.0.5
+
+**Date:** 13-Oct-2018
+
+- Correct `methods` parsing in output.
+
 ## Version 1.0.4
 
 **Date:** 09-Oct-2018
