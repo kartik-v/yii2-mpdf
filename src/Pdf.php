@@ -306,11 +306,13 @@ class Pdf extends Component
         if (!empty($this->_css)) {
             return $this->_css;
         }
-        $cssFile = empty($this->cssFile) ? '' : Yii::getAlias($this->cssFile);
-        if (empty($cssFile) || !file_exists($cssFile)) {
-            $css = '';
-        } else {
-            $css = file_get_contents($cssFile);
+        $css = '';
+        $cssFiles = is_array($this->cssFile) ? $this->cssFile : [$this->cssFile];
+        foreach($cssFiles as $cssFile) {
+            $cssFile = Yii::getAlias($cssFile);
+            if (!empty($cssFile) && file_exists($cssFile)) {
+                $css .= file_get_contents($cssFile);
+            }
         }
         $css .= $this->cssInline;
         return $css;
