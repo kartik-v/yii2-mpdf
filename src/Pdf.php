@@ -312,6 +312,8 @@ class Pdf extends Component
             $cssFile = Yii::getAlias($cssFile);
             if (!empty($cssFile) && file_exists($cssFile)) {
                 $css .= file_get_contents($cssFile);
+            } else {
+                throw new InvalidConfigException("CSS File not found: '{$cssFile}'.");
             }
         }
         $css .= $this->cssInline;
