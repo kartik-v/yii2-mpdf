@@ -1,6 +1,13 @@
 Change Log: `yii2-mpdf`
 =======================
 
+## Version 1.0.6
+
+**Date:** _under development_
+
+- Update README.
+- (enh #89): Fix README.md & throw InvalidConfigException for invalid CSS config.
+
 ## Version 1.0.5
 
 **Date:** 13-Oct-2018

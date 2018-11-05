@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2018
  * @package yii2-mpdf
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 namespace kartik\mpdf;
