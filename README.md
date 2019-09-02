@@ -128,6 +128,36 @@ return $pdf->render();
 
 For other usage and details, read the detailed [documentation](http://demos.krajee.com/mpdf).
 
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/kartik-v/yii2-mpdf/graphs/contributors"><img src="https://opencollective.com/yii2-mpdf/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/yii2-mpdf/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/yii2-mpdf"><img src="https://opencollective.com/yii2-mpdf/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/yii2-mpdf/contribute)]
+
+<a href="https://opencollective.com/yii2-mpdf/organization/0/website"><img src="https://opencollective.com/yii2-mpdf/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/1/website"><img src="https://opencollective.com/yii2-mpdf/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/2/website"><img src="https://opencollective.com/yii2-mpdf/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/3/website"><img src="https://opencollective.com/yii2-mpdf/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/4/website"><img src="https://opencollective.com/yii2-mpdf/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/5/website"><img src="https://opencollective.com/yii2-mpdf/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/6/website"><img src="https://opencollective.com/yii2-mpdf/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/7/website"><img src="https://opencollective.com/yii2-mpdf/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/8/website"><img src="https://opencollective.com/yii2-mpdf/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/yii2-mpdf/organization/9/website"><img src="https://opencollective.com/yii2-mpdf/organization/9/avatar.svg"></a>
+
 ## License
 
 **yii2-mpdf** is released under the BSD-3-Clause License. See the bundled `LICENSE.md` for details.
