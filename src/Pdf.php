@@ -6,7 +6,7 @@
  * @version 1.0.6
  */
 
-namespace michkarevev\mpdf;
+namespace kartik\mpdf;
 
 use Mpdf\Mpdf;
 use Yii;
