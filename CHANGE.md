@@ -3,8 +3,10 @@ Change Log: `yii2-mpdf`
 
 ## Version 1.0.6
 
-**Date:** _under development_
+**Date:** 14-Apr-2020
 
+- (enh #106): Fix getCss function.
+- (enh #92, #104, #105): Enhancements for MPDF v8.0.
 - Update README.
 - (enh #89): Fix README.md & throw InvalidConfigException for invalid CSS config.
 
