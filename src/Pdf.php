@@ -143,7 +143,7 @@ class Pdf extends Component
      */
     public $orientation = self::ORIENT_PORTRAIT;
     /**
-     * @var string css file to prepend to the PDF
+     * @var array|string css files to prepend to the PDF
      */
     public $cssFile = '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css';
     /**
