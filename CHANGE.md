@@ -1,6 +1,14 @@
 Change Log: `yii2-mpdf`
 =======================
 
+## Version 1.0.7
+
+**Date:** 17-Aug-2021
+
+- (enh #121): BS3 `cssFile` path corrected in documentation.
+- (enh #120): Default value must be empty array.
+- (enh #111): Update PHP Doc to mention `cssFile` can be an `array` or `string.
+
 ## Version 1.0.6
 
 **Date:** 14-Apr-2020
