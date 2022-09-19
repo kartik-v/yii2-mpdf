@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "mpdf/mpdf": "~8.0"
+        "mpdf/mpdf": "~8.1"
     },
     "autoload": {
         "psr-4": {
